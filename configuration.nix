@@ -41,6 +41,12 @@
     uid = 1000;
   };
 
+  nix.package = pkgs.nixUnstable;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+
+
   services.openssh.enable = true;
 
   # Use the systemd-boot EFI boot loader.
