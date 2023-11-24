@@ -20,7 +20,7 @@
     };
   };
   
-  outputs = { self, nixpkgs, nur }: {
+  outputs = inputs@{ self, nixpkgs, nur, home-manager, ...}: {
     nixosConfigurations = {
       desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -28,6 +28,8 @@
           ./configuration.nix
           home-manager.nixosModules.home-manager
           {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit unstable; };
           }
           nur.nixosModules.nur
