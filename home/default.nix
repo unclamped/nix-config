@@ -18,6 +18,12 @@
     stateVersion = "23.05";
   };
 
+  programs.git = {
+    enable = true;
+    userName = "unclamped";
+    userEmail = "clear6860@tutanota.com";
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }

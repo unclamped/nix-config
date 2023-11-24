@@ -118,7 +118,6 @@
     curl
     git
     hyfetch
-    xfce.thunar  # xfce4's file manager
   ];
 
   # Enable sound with pipewire.
