@@ -29,10 +29,11 @@
       usermail = "clear6860@tutanota.com";
   in {
     nixosConfigurations = {
-      desktop = nixpkgs.lib.nixosSystem {
+      vm = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./configuration.nix
+          ./hosts/vm/system.nix
+
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
