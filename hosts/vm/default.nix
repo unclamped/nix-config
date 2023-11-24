@@ -1,86 +1,27 @@
-{ config, lib, pkgs, ... }:
+# Edit this configuration file to define what should be installed on
+# your system. Help is available in the configuration.nix(5) man page, on
+# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
+
+{ config, pkgs, ... }:
 
 {
   imports =
-    [
+    [ ../../modules/system.nix
+      
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      "${builtins.fetchTarball { 
-        url = "https://github.com/nix-community/disko/archive/master.tar.gz";
-        sha256 = "sha256-LD+PIUbm1yQmQmGIbSsc/PB1dtJtGqXFgxRc1C7LlfQ=";
-      }}/module.nix"
-      ./disko-config.nix
     ];
-
-  # grahamc's "Erase your darlings" implemented for Btrfs. Thanks accelbread and oposs for the help
-  boot.initrd.postResumeCommands = ''
-    mkdir -vp /tmp
-    MNTDIR=$(mktemp -d)
-    (
-      mount -t btrfs -o subvol=/ /dev/mapper/vda-opened "$MNTDIR"
-      trap 'umount "$MNTDIR"; rm -rf $MNTDIR' EXIT
-
-      echo "Creating needed directories"
-      mkdir -vp "$MNTDIR"/persist/etc/nixos
-
-      echo "Cleaning root subvolume"
-      btrfs subvolume list -o "$MNTDIR/fsroot" | cut -f9 -d ' ' |
-      while read -r subvolume; do
-        btrfs subvolume delete "$MNTDIR/$subvolume"
-      done && btrfs subvolume delete "$MNTDIR/fsroot"
-
-      echo "Restoring blank subvolume"
-      btrfs subvolume create "$MNTDIR/fsroot"
-    )
-  '';
-
-  users.mutableUsers = false;
-  users.users.root.password = "1";
-
-  users.users.maru = {
-    isNormalUser  = true;
-    description  = "Maruwu";
-    extraGroups  = [ "wheel" ];
-    password = "1";
-    uid = 1000;
-  };
-
-  nix.package = pkgs.nixUnstable;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
-
-
-  services.openssh.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # networking.hostName = "nixos"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
-  # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
+  # Define your hostname.
+  networking.hostName = "vm";
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
 
-
-  
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -156,4 +97,3 @@
   system.stateVersion = "23.11"; # Did you read the comment?
 
 }
-

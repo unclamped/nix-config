@@ -59,12 +59,6 @@
                       swap.swapfile.size = "20M";
                     };
                   };
-                  #postCreateHook = ''
-                  #    MNTDIR=$(mktemp -d)
-                  #    mount -t btrfs /dev/mapper/vda-opened $MNTDIR
-                  #    # trap 'umount $MNTDIR; rm -rf $MNTDIR' EXIT
-                  #    btrfs subvolume snapshot -r $MNTDIR/fsroot $MNTDIR/fsroot-blank
-                  #'';
                 };
               };
             };
