@@ -139,8 +139,10 @@
     extraGroups  = [ "wheel" ];
     password = "1";
     uid = 1000;
+    # TODO: Move this to modules/settings
     openssh.authorizedKeys.keys = [
         "sk-ecdsa-sha2-nistp256@openssh.com AAAAInNrLWVjZHNhLXNoYTItbmlzdHAyNTZAb3BlbnNzaC5jb20AAAAIbmlzdHAyNTYAAABBBE7BnQWE73D27wBYI9n1gvmftCMKbvGo27j/beAj65O+64Oh1T50MhT4Jnwa5xRufuYgGqVvjPDGkqkQe3UXgXYAAAAEc3NoOg== clear6860@tutanota.com"
+        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDnw1jM9dmXiYjg3zZxIik2tbC+GgHoI7f8iahPYm3ACW7EUIC1yy0sx3wP8uElshioLegAQ/dY6hooLx+G32gOP13uRHd2fPRX6XuTOhNkY1C1tG0b9SHUSqi4ihzSrvvarUV+2el7rirEKbXbKmaY8cScA7JwijUSeGqrtHslQIVCWbYu7Bz/waacmQPFDIDAzm8uo3VxMYQ3pJxy+vvgmtSPfoPTBxgfJl72a+x74IejjXeq35tJKQZ+BohBREYjmwfmvmY0X4wgQ0Q4cLyUWFgMYahhNTqISet4PlKtk4Wge7J5AIL/8kWH0EoiZeoc13zXjNDIg1+vg880rIJDpFzS9Vu9OfgQTliKfNezlDrMmNc6HMD5lqRrBVOu5TeNoJC+a2yVxgbeCn+uTIEh6RDt2/gy+sDdGjbvWzcr4c5hXoasU5qqaUINq2MR6gGwIBXOdHkNLPh9ZzcKhuzFK7/BBrdEDIHoYenXpPkrxjW9CCXcjXfZtdyv39ylNf8= maru@nixos"
     ];
   };
 }
