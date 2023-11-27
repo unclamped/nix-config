@@ -28,7 +28,7 @@
       vm = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/"${system.hostname}"/default.nix
+          ./hosts/${system.hostname}/default.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
