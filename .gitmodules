@@ -1,0 +1,3 @@
+[submodule "modules/impermanence"]
+	path = modules/impermanence
+	url = https://github.com/nix-community/impermanence.git
