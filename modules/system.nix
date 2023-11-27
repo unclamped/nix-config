@@ -7,6 +7,7 @@
       sha256 = "sha256-LD+PIUbm1yQmQmGIbSsc/PB1dtJtGqXFgxRc1C7LlfQ=";
     }}/module.nix"
     ./disko-config.nix
+    ./opt-in.nix
   ];
 
   # Set your time zone.
@@ -33,28 +34,6 @@
   # Use systemd-boot as my bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # grahamc's "Erase your darlings" implemented for Btrfs. Thanks accelbread and oposs for the help
-  boot.initrd.postResumeCommands = ''
-    mkdir -vp /tmp
-    MNTDIR=$(mktemp -d)
-    (
-      mount -t btrfs -o subvol=/ /dev/mapper/vda-opened "$MNTDIR"
-      trap 'umount "$MNTDIR"; rm -rf $MNTDIR' EXIT
-
-      echo "Creating needed directories"
-      mkdir -vp "$MNTDIR"/persist/etc/nixos
-
-      echo "Cleaning root subvolume"
-      btrfs subvolume list -o "$MNTDIR/fsroot" | cut -f9 -d ' ' |
-      while read -r subvolume; do
-        btrfs subvolume delete "$MNTDIR/$subvolume"
-      done && btrfs subvolume delete "$MNTDIR/fsroot"
-
-      echo "Restoring blank subvolume"
-      btrfs subvolume create "$MNTDIR/fsroot"
-    )
-  '';
 
   nix.package = pkgs.nixUnstable;
   nix.extraOptions = ''
@@ -148,8 +127,6 @@
 
     udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   };
-
-  users.mutableUsers = false;
 
   # Set the root password so we don't get screwed by our stateless system lol
   users.users.root.password = "1";
