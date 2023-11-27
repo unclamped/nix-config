@@ -1,10 +1,11 @@
-#{ hostName, target-disk, ... }
+{ config, ... }:
+
 {
   disko.devices = {
     disk = {
-      vda = {
+      main = {
         type = "disk";
-        device = "/dev/vda";
+        device = "${system.disk}";
         content = {
           type = "gpt";
           partitions = {
@@ -24,7 +25,7 @@
               size = "100%";
               content = {
                 type = "luks";
-                name = "vda-opened";
+                name = "main-opened";
                 passwordFile = "/tmp/secret.key"; # Interactive
                 settings.allowDiscards = true;
                 extraFormatArgs = [

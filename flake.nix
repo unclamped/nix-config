@@ -23,22 +23,17 @@
     nur,
     home-manager,
     ...
-  }: let
-      username = "maru";
-      userfullname = "Maru Olcese";
-      usermail = "clear6860@tutanota.com";
-  in {
+  }: {
     nixosConfigurations = {
       vm = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/vm/default.nix
-
+          ./hosts/"${system.hostname}"/default.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users."${username}" = import ./home/default.nix;
+            home-manager.users."${user.username}" = import ./home/default.nix;
           }
           nur.nixosModules.nur
         ];

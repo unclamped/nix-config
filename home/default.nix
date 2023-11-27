@@ -4,8 +4,8 @@
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
-    username = "maru";
-    homeDirectory = "/home/maru";
+    username = "${user.username}";
+    homeDirectory = "/home/${user.username}";
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
@@ -20,8 +20,8 @@
 
   programs.git = {
     enable = true;
-    userName = "unclamped";
-    userEmail = "clear6860@tutanota.com";
+    userName = "${user.gitUsername}";
+    userEmail = "${user.gitEmail}";
   };
 
   # Let Home Manager install and manage itself.

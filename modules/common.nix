@@ -8,10 +8,11 @@
     }}/module.nix"
     ./disko-config.nix
     ./opt-in.nix
+    ./settings/user.nix
   ];
 
   # Set your time zone.
-  time.timeZone = "America/Argentina/Cordoba";
+  time.timeZone = "${system.timeZone}";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -132,7 +133,7 @@
   users.users.root.password = "1";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-   users.users.maru = {
+   users.users."${user.username}" = {
     isNormalUser  = true;
     description  = "Maruwu";
     extraGroups  = [ "wheel" ];
