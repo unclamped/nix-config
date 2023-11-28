@@ -5,8 +5,6 @@ let
   user = import ./settings/user.nix { inherit config; };
 in
 {
-  imports = [ ./impermanence/nixos.nix ];
-
   # grahamc's "Erase your darlings" implemented for Btrfs. Thanks accelbread and oposs for the help
   boot.initrd.postResumeCommands = ''
     mkdir -vp /tmp
