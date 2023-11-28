@@ -10,9 +10,6 @@
     ./opt-in.nix
   ];
 
-  system = system;
-  user = user;
-
   # Set your time zone.
   time.timeZone = config.system.timeZone;
 
