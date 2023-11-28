@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./settings/user.nix
+  ];
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;

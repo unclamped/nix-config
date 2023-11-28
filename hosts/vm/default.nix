@@ -4,15 +4,17 @@
 
 { config, pkgs, ... }:
 
-let
-  common = import ../../modules/common.nix { inherit config pkgs; };
-in
 {
   imports =
     [ ../../modules/common.nix
       
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+
+      imports = [
+        ../../modules/settings/system.nix
+        ../../modules/settings/user.nix
+      ];
     ];
 
   # Use the systemd-boot EFI boot loader.

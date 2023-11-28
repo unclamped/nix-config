@@ -1,6 +1,10 @@
 { config, ... }:
 
 {
+  imports = [
+    ./settings/system.nix
+  ];
+
   disko.devices = {
     disk = {
       ${config.system.disk} = {

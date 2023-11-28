@@ -8,6 +8,8 @@
     }}/module.nix"
     ./disko-config.nix
     ./opt-in.nix
+    ./settings/system.nix
+    ./settings/user.nix
   ];
 
   # Set your time zone.

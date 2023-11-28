@@ -1,6 +1,11 @@
 { config, ... }:
 
 {
+  imports = [
+    ./settings/system.nix
+    ./settings/user.nix
+  ];
+
   # grahamc's "Erase your darlings" implemented for Btrfs. Thanks accelbread and oposs for the help
   boot.initrd.postResumeCommands = ''
     mkdir -vp /tmp
