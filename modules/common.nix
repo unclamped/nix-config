@@ -9,6 +9,7 @@
     ./disko-config.nix
     ./opt-in.nix
     ./settings/user.nix
+    ./settings/system.nix
   ];
 
   # Set your time zone.
