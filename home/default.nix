@@ -1,8 +1,5 @@
 { config, pkgs, ... }:
 
-let
-  common = import ../../modules/common.nix { inherit config pkgs; };
-in
 {
   home-manager = {
     useGlobalPkgs = true;
@@ -10,15 +7,15 @@ in
   };
 
   home = {
-    username = user.username;
-    homeDirectory = "/home/${common.user.username}";
+    username = config.user.username;
+    homeDirectory = "/home/${config.user.username}";
     stateVersion = "23.05";
   };
 
   programs.git = {
     enable = true;
-    userName = user.gitUsername;
-    userEmail = user.gitEmail;
+    userName = config.user.gitUsername;
+    userEmail = config.user.gitEmail;
   };
 
   programs.home-manager.enable = true;

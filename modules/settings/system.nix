@@ -1,5 +1,5 @@
 { config, lib, ... }: {
-  options = {
+  options.system = {
     disk = lib.mkOption {
       type = lib.types.str;
       default = "vda";

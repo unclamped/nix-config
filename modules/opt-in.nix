@@ -1,16 +1,12 @@
 { config, ... }:
 
-let
-  system = import ./settings/system.nix { inherit config; };
-  user = import ./settings/user.nix { inherit config; };
-in
 {
   # grahamc's "Erase your darlings" implemented for Btrfs. Thanks accelbread and oposs for the help
   boot.initrd.postResumeCommands = ''
     mkdir -vp /tmp
     MNTDIR=$(mktemp -d)
     (
-      mount -t btrfs -o subvol=/ /dev/mapper/${system.disk}-opened "$MNTDIR"
+      mount -t btrfs -o subvol=/ /dev/mapper/${config.system.disk}-opened "$MNTDIR"
       trap 'umount "$MNTDIR"; rm -rf $MNTDIR' EXIT
 
       echo "Creating needed directories"
@@ -44,7 +40,7 @@ in
       "/etc/machine-id"
       { file = "/etc/nix/id_rsa"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
     ];
-    users."${user.username}" = {
+    users."${config.user.username}" = {
       directories = [
         "Downloads"
         "Music"

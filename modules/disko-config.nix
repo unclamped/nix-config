@@ -1,14 +1,11 @@
 { config, ... }:
 
-let
-  system = import ./settings/system.nix { inherit config; };
-in
 {
   disko.devices = {
     disk = {
       ${system.disk} = {
         type = "disk";
-        device = /dev/${system.disk};
+        device = "/dev/${config.system.disk}";
         content = {
           type = "gpt";
           partitions = {
@@ -28,7 +25,7 @@ in
               size = "100%";
               content = {
                 type = "luks";
-                name = "${system.disk}-opened";
+                name = "${config.system.disk}-opened";
                 passwordFile = "/tmp/secret.key"; # Interactive
                 settings.allowDiscards = true;
                 extraFormatArgs = [
@@ -36,11 +33,11 @@ in
                   "--key-size 512"
                   "--iter-time 10000"
                   #"--hash whirlpool"
-                  "--label ${system.disk}-crypt"
+                  "--label ${config.system.disk}-crypt"
                 ];
                 content = {
                   type = "btrfs";
-                  extraArgs = [ "--label ${system.disk}" ];
+                  extraArgs = [ "--label ${config.system.disk}" ];
                   subvolumes = {
                     "/fsroot" = {
                       mountpoint = "/";

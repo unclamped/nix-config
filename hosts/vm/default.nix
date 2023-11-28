@@ -20,7 +20,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Define your hostname.
-  networking.hostName = common.system.hostName;
+  networking.hostName = config.system.hostName;
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;

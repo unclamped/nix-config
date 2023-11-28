@@ -1,9 +1,5 @@
 { config, pkgs, ... }:
 
-let
-  system = import ./settings/system.nix { inherit config; };
-  user = import ./settings/user.nix { inherit config; };
-in
 {
   imports = [
     "${builtins.fetchTarball { 
@@ -18,7 +14,7 @@ in
   user = user;
 
   # Set your time zone.
-  time.timeZone = system.timeZone;
+  time.timeZone = config.system.timeZone;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -139,7 +135,7 @@ in
   users.users.root.password = "1";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-   users.users."${user.username}" = {
+   users.users."${config.user.username}" = {
     isNormalUser  = true;
     description  = "Maruwu";
     extraGroups  = [ "wheel" ];

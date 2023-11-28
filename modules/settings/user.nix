@@ -1,5 +1,5 @@
 { config, lib, ... }: {
-  options = {
+  options.user = {
     username = lib.mkOption {
       type = lib.types.str;
       default = "maru";
