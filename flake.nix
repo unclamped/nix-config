@@ -27,7 +27,7 @@
       vm = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/${system.hostname}/default.nix
+          ./hosts/vm/default.nix
           nur.nixosModules.nur
         ];
       };
