@@ -23,6 +23,7 @@
     self,
     nixpkgs,
     nur,
+    impermanence,
     ...
   }: {
     nixosConfigurations = {
