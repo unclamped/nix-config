@@ -1,11 +1,14 @@
 { config, ... }:
 
+let
+  system = import ./settings/system.nix { inherit config pkgs; };
+in
 {
   disko.devices = {
     disk = {
-      main = {
+      ${system.disk} = {
         type = "disk";
-        device = "${system.disk}";
+        device = /dev/${system.disk};
         content = {
           type = "gpt";
           partitions = {
@@ -25,7 +28,7 @@
               size = "100%";
               content = {
                 type = "luks";
-                name = "main-opened";
+                name = "${system.disk}-opened";
                 passwordFile = "/tmp/secret.key"; # Interactive
                 settings.allowDiscards = true;
                 extraFormatArgs = [
@@ -33,11 +36,11 @@
                   "--key-size 512"
                   "--iter-time 10000"
                   #"--hash whirlpool"
-                  "--label vda-crypt"
+                  "--label ${system.disk}-crypt"
                 ];
                 content = {
                   type = "btrfs";
-                  extraArgs = [ "--label vda" ];
+                  extraArgs = [ "--label ${system.disk}" ];
                   subvolumes = {
                     "/fsroot" = {
                       mountpoint = "/";

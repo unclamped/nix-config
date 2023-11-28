@@ -2,7 +2,7 @@
   options = {
     disk = lib.mkOption {
       type = lib.types.str;
-      default = "/dev/vda";
+      default = "vda";
       description = "Disk where NixOS should be installed at";
     };
     hostName = lib.mkOption {

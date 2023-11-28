@@ -18,7 +18,7 @@ in
   user = user;
 
   # Set your time zone.
-  time.timeZone = "${system.timeZone}";
+  time.timeZone = system.timeZone;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";

@@ -1,5 +1,9 @@
 { config, ... }:
 
+let
+  system = import ./settings/system.nix { inherit config pkgs; };
+  user = import ./settings/user.nix { inherit config pkgs; };
+in
 {
   imports = [ ./impermanence/nixos.nix ];
 
@@ -8,7 +12,7 @@
     mkdir -vp /tmp
     MNTDIR=$(mktemp -d)
     (
-      mount -t btrfs -o subvol=/ /dev/mapper/vda-opened "$MNTDIR"
+      mount -t btrfs -o subvol=/ /dev/mapper/${system.disk}-opened "$MNTDIR"
       trap 'umount "$MNTDIR"; rm -rf $MNTDIR' EXIT
 
       echo "Creating needed directories"
