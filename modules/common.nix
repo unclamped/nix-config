@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 
+let
+  system = import ./settings/system.nix { inherit config pkgs; };
+  user = import ./settings/user.nix { inherit config pkgs; };
+in
 {
   imports = [
     "${builtins.fetchTarball { 
@@ -8,9 +12,10 @@
     }}/module.nix"
     ./disko-config.nix
     ./opt-in.nix
-    ./settings/user.nix
-    ./settings/system.nix
   ];
+
+  system = system;
+  user = user;
 
   # Set your time zone.
   time.timeZone = "${system.timeZone}";

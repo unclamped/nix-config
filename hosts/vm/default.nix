@@ -4,6 +4,9 @@
 
 { config, pkgs, ... }:
 
+let
+  common = import ../../modules/common.nix { inherit config pkgs lib; };
+in
 {
   imports =
     [ ../../modules/common.nix
@@ -17,7 +20,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Define your hostname.
-  networking.hostName = "${system.hostName}";
+  networking.hostName = common.system.hostName;
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
