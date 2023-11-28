@@ -42,7 +42,9 @@
       "/var/lib/systemd/coredump"
     ];
     files = [
-      "/etc/machine-id"
+      # FIXME: later readd this id
+      #"/etc/machine-id"
+      
       { file = "/etc/nix/id_rsa"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
     ];
     users."${config.user.username}" = {
