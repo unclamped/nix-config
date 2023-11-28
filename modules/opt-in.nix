@@ -1,8 +1,8 @@
 { config, ... }:
 
 let
-  system = import ./settings/system.nix { inherit config pkgs; };
-  user = import ./settings/user.nix { inherit config pkgs; };
+  system = import ./settings/system.nix { inherit config; };
+  user = import ./settings/user.nix { inherit config; };
 in
 {
   imports = [ ./impermanence/nixos.nix ];

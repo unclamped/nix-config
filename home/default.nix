@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  user = import ./settings/user.nix { inherit config pkgs; };
+  common = import ../../modules/common.nix { inherit config pkgs; };
 in
 {
   home-manager = {
@@ -11,7 +11,7 @@ in
 
   home = {
     username = user.username;
-    homeDirectory = "/home/${user.username}";
+    homeDirectory = "/home/${common.user.username}";
     stateVersion = "23.05";
   };
 

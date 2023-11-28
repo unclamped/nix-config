@@ -1,7 +1,7 @@
 { config, ... }:
 
 let
-  system = import ./settings/system.nix { inherit config pkgs; };
+  system = import ./settings/system.nix { inherit config; };
 in
 {
   disko.devices = {
