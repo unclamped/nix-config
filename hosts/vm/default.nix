@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 
 let
-  common = import ../../modules/common.nix { inherit config pkgs lib; };
+  common = import ../../modules/common.nix { inherit config pkgs; };
 in
 {
   imports =
