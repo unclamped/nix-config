@@ -33,7 +33,7 @@
   # FIXME: For some reason this doesn't work!
   security.sudo.extraConfig = "Defaults lecture=\"never\"";
 
-  environment.persistence."/persistent" = {
+  environment.persistence."/persist" = {
     hideMounts = true;
     directories = [
       "/var/log"
