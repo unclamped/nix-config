@@ -17,7 +17,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Define your hostname.
-  networking.hostName = "${system.hostName}";
+  networking.hostName = "${user.username}";
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
