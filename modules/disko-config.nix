@@ -3,7 +3,7 @@
 {
   disko.devices = {
     disk = {
-      ${system.disk} = {
+      ${config.system.disk} = {
         type = "disk";
         device = "/dev/${config.system.disk}";
         content = {
