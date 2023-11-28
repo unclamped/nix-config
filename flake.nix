@@ -31,6 +31,7 @@
         modules = [
           ./hosts/vm/default.nix
           nur.nixosModules.nur
+          impermanence.nixosModules.impermanence
         ];
       };
     };
