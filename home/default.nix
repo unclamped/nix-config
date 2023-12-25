@@ -13,7 +13,7 @@
   home = {
     username = config.user.username;
     homeDirectory = "/home/${config.user.username}";
-    stateVersion = "23.05";
+    stateVersion = "24.05";
   };
 
   programs.git = {
