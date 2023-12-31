@@ -4,7 +4,7 @@
   imports = [
     "${builtins.fetchTarball { 
       url = "https://github.com/nix-community/disko/archive/master.tar.gz";
-      sha256 = "sha256-LD+PIUbm1yQmQmGIbSsc/PB1dtJtGqXFgxRc1C7LlfQ=";
+      sha256 = "sha256:1x4mrcpd8p0lhg2sa6kds9v7bw7w3hmnv23188k29mz68qhqygrc";
     }}/module.nix"
     ./disko-config.nix
     ./opt-in.nix
